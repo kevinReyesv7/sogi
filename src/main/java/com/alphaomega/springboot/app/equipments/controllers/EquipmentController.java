@@ -11,6 +11,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -24,7 +25,7 @@ import com.alphaomega.springboot.app.equipments.model.entity.Equipment;
 import com.alphaomega.springboot.app.equipments.model.service.IEquipmentService;
 
 @CrossOrigin
-@RestController("/equipments")
+@RestController
 public class EquipmentController {
 
 	@Autowired
@@ -32,19 +33,18 @@ public class EquipmentController {
 	
 	
 	
-	@GetMapping("/listar")
+	@GetMapping("/equipamiento")
 	public List<Equipment> listar(){
 		return equipmentService.findAll();
 	}
 	
-	@GetMapping("/ver/{id}")
+	@GetMapping("/equipamiento/{id}")
 	public Equipment ver(@PathVariable Long id) {
 		return equipmentService.findById(id);
 	}
 	
 	
-    @PostMapping(value = "/crear")
-
+    @PostMapping(value = "/equipamiento")
     public ResponseEntity<Equipment> addEquipment(@Validated @RequestBody Equipment equipment) 
 
             throws URISyntaxException {
@@ -69,7 +69,7 @@ public class EquipmentController {
 
     }
 	
-	@PutMapping("/editar/{id}")
+	@PutMapping("/equipamiento/{id}")
 	public ResponseEntity<Object> update(@Validated @RequestBody Equipment equipment, @PathVariable long id) {
         try {
 
@@ -93,7 +93,7 @@ public class EquipmentController {
         }
 	}
 	
-	@PutMapping("/editarEstado/{id}")
+	@PatchMapping("/equipamiento/{id}")
 	public ResponseEntity<Object> updateState(@PathVariable long id) {
         try {
         	equipmentService.updateState(id);
@@ -108,7 +108,7 @@ public class EquipmentController {
 	}
 	
 	
-    @DeleteMapping("eliminar/{id}")
+    @DeleteMapping("/equipamiento/{id}")
     public ResponseEntity<Void> deleteEquipmentById(@PathVariable long id) {
 
         try {
