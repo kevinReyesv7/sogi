@@ -3,10 +3,8 @@ package com.alphaomega.springboot.app.equipments.controllers;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -29,10 +27,6 @@ import com.alphaomega.springboot.app.equipments.model.service.IEquipmentService;
 @RestController("/equipments")
 public class EquipmentController {
 
-
-	@Value("${server.port}")
-	private Integer port;
-	
 	@Autowired
 	private IEquipmentService equipmentService;
 	
@@ -40,18 +34,11 @@ public class EquipmentController {
 	
 	@GetMapping("/listar")
 	public List<Equipment> listar(){
-		return equipmentService.findAll().stream().map(eq -> {
-			//eq.setPort(Integer.parseInt(env.getProperty("local.server.port")));
-			eq.setPort(port);
-			return eq;
-		}).collect(Collectors.toList());
+		return equipmentService.findAll();
 	}
 	
 	@GetMapping("/ver/{id}")
 	public Equipment ver(@PathVariable Long id) {
-		Equipment equipment = equipmentService.findById(id);
-		//equipment.setPort(Integer.parseInt(env.getProperty("local.server.port")));
-		equipment.setPort(port);
 		return equipmentService.findById(id);
 	}
 	
