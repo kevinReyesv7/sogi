@@ -27,6 +27,16 @@ import com.alphaomega.springboot.app.equipments.exception.ResourceNotFoundExcept
 import com.alphaomega.springboot.app.equipments.model.entity.Equipment;
 import com.alphaomega.springboot.app.equipments.model.service.IEquipmentService;
 
+@Bean
+    public WebMvcConfigurer configure() {
+        return new WebMvcConfigurer() {
+            	@Override
+            	public void addCorsMappings(CorsRegistry registry) {
+                	registry.addMapping("/equipamiento/**").allowedOrigins("*").allowedMethods("GET", "POST", "PUT", "DELETE");
+            	}
+        };
+    }
+
 @RestController
 public class EquipmentController {
 
@@ -97,17 +107,6 @@ public class EquipmentController {
 
         }
 	}
-	
-	@Bean
-    	public WebMvcConfigurer configure() {
-        	return new WebMvcConfigurer() {
-            		@Override
-            		public void addCorsMappings(CorsRegistry registry) {
-                		registry.addMapping("/equipamiento/**").allowedOrigins("*").allowedMethods("GET", "POST", "PUT", "DELETE");
-            		}
-        	};
-    	}
-	
 	
 	@PatchMapping("/equipamiento/{id}")
 	public ResponseEntity<Object> updateState(@PathVariable long id) {
