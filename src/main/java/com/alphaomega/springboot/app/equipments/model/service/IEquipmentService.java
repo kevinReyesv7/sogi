@@ -11,6 +11,7 @@ public interface IEquipmentService {
 
 	public List<Equipment> findAll();
 	public Equipment findById(Long id);
+	public List<Equipment> findByIsDeletedFalse();
 	public Equipment save(Equipment equipment) throws BadResourceException, ResourceAlreadyExistsException;
 	public void update(Equipment equipment) throws BadResourceException, ResourceNotFoundException;
 	public void delete(Long id) throws ResourceNotFoundException;
