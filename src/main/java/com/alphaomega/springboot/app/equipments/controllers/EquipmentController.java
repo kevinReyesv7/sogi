@@ -33,16 +33,22 @@ public class EquipmentController {
 	
 	
 	
-	@GetMapping("/equipamiento")
-	public List<Equipment> listar(){
+	@GetMapping("/equipamiento/todos")
+	public List<Equipment> listartodos(){
 		return equipmentService.findAll();
 	}
+	
+	
 	
 	@GetMapping("/equipamiento/{id}")
 	public Equipment ver(@PathVariable Long id) {
 		return equipmentService.findById(id);
 	}
 	
+	@GetMapping("/equipamiento")
+    	public List<Equipment> listar(){
+        	return equipmentService.findByIsDeletedFalse();
+    	}
 	
     @PostMapping(value = "/equipamiento")
     public ResponseEntity<Equipment> addEquipment(@Validated @RequestBody Equipment equipment) 
