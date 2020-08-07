@@ -25,6 +25,8 @@ import com.alphaomega.springboot.app.equipments.exception.ResourceNotFoundExcept
 import com.alphaomega.springboot.app.equipments.model.entity.Equipment;
 import com.alphaomega.springboot.app.equipments.model.service.IEquipmentService;
 
+
+@CrossOrigin(origins = "*")
 @RestController
 public class EquipmentController {
 
