@@ -25,7 +25,11 @@ public class EquipmentServiceImpl implements IEquipmentService{
 		return (List<Equipment>) equipmentRepository.findAll();
 	}
 
-	
+	@Override
+    	@Transactional(readOnly = true)
+    	public List<Equipment> findByIsDeletedFalse() {
+        	return (List<Equipment>) equipmentRepository.findByIsDeletedFalse();
+    	}
 	
 	@Override
 	@Transactional(readOnly = true)
