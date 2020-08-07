@@ -32,26 +32,28 @@ public class EquipmentController {
 	private IEquipmentService equipmentService;
 	
 	
-	
+	@CrossOrigin(origins = "*")
 	@GetMapping("/equipamiento/todos")
 	public List<Equipment> listartodos(){
 		return equipmentService.findAll();
 	}
 	
 	
-	
+	@CrossOrigin(origins = "*")
 	@GetMapping("/equipamiento/{id}")
 	public Equipment ver(@PathVariable Long id) {
 		return equipmentService.findById(id);
 	}
 	
+	@CrossOrigin(origins = "*")
 	@GetMapping("/equipamiento")
     	public List<Equipment> listar(){
         	return equipmentService.findByIsDeletedFalse();
     	}
 	
-    @PostMapping(value = "/equipamiento")
-    public ResponseEntity<Equipment> addEquipment(@Validated @RequestBody Equipment equipment) 
+	@CrossOrigin(origins = "*")
+	@PostMapping(value = "/equipamiento")
+	public ResponseEntity<Equipment> addEquipment(@Validated @RequestBody Equipment equipment) 
 
             throws URISyntaxException {
 
@@ -75,6 +77,7 @@ public class EquipmentController {
 
     }
 	
+	@CrossOrigin(origins = "*")
 	@PutMapping("/equipamiento/{id}")
 	public ResponseEntity<Object> update(@Validated @RequestBody Equipment equipment, @PathVariable long id) {
         try {
@@ -99,6 +102,7 @@ public class EquipmentController {
         }
 	}
 	
+	@CrossOrigin(origins = "*")
 	@PatchMapping("/equipamiento/{id}")
 	public ResponseEntity<Object> updateState(@PathVariable long id) {
         try {
@@ -113,8 +117,8 @@ public class EquipmentController {
         }
 	}
 	
-	
-    @DeleteMapping("/equipamiento/{id}")
+@CrossOrigin(origins = "*")
+@DeleteMapping("/equipamiento/{id}")
     public ResponseEntity<Void> deleteEquipmentById(@PathVariable long id) {
 
         try {
