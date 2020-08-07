@@ -24,35 +24,33 @@ import com.alphaomega.springboot.app.equipments.exception.ResourceNotFoundExcept
 import com.alphaomega.springboot.app.equipments.model.entity.Equipment;
 import com.alphaomega.springboot.app.equipments.model.service.IEquipmentService;
 
-@CrossOrigin(origins = "*")
+@CrossOrigin
 @RestController
 public class EquipmentController {
 
 	@Autowired
 	private IEquipmentService equipmentService;
 	
-	
-	@CrossOrigin(origins = "*")
 	@GetMapping("/equipamiento/todos")
+	@CrossOrigin(origins = "https://sogireact.herokuapp.com/listar-equipamientos")
 	public List<Equipment> listartodos(){
 		return equipmentService.findAll();
 	}
 	
-	
-	@CrossOrigin(origins = "*")
 	@GetMapping("/equipamiento/{id}")
+	@CrossOrigin(origins = "https://sogireact.herokuapp.com/listar-equipamientos")
 	public Equipment ver(@PathVariable Long id) {
 		return equipmentService.findById(id);
 	}
 	
-	@CrossOrigin(origins = "*")
 	@GetMapping("/equipamiento")
+	@CrossOrigin(origins = "https://sogireact.herokuapp.com/listar-equipamientos")
     	public List<Equipment> listar(){
         	return equipmentService.findByIsDeletedFalse();
     	}
 	
-	@CrossOrigin(origins = "*")
 	@PostMapping(value = "/equipamiento")
+	@CrossOrigin(origins = "https://sogireact.herokuapp.com/listar-equipamientos")
 	public ResponseEntity<Equipment> addEquipment(@Validated @RequestBody Equipment equipment) 
 
             throws URISyntaxException {
@@ -77,8 +75,9 @@ public class EquipmentController {
 
     }
 	
-	@CrossOrigin(origins = "*")
+	
 	@PutMapping("/equipamiento/{id}")
+	@CrossOrigin(origins = "https://sogireact.herokuapp.com/listar-equipamientos")
 	public ResponseEntity<Object> update(@Validated @RequestBody Equipment equipment, @PathVariable long id) {
         try {
 
@@ -102,8 +101,9 @@ public class EquipmentController {
         }
 	}
 	
-	@CrossOrigin(origins = "*")
+	
 	@PatchMapping("/equipamiento/{id}")
+	@CrossOrigin(origins = "https://sogireact.herokuapp.com/listar-equipamientos")
 	public ResponseEntity<Object> updateState(@PathVariable long id) {
         try {
         	equipmentService.updateState(id);
@@ -117,14 +117,12 @@ public class EquipmentController {
         }
 	}
 	
-@CrossOrigin(origins = "*")
-@DeleteMapping("/equipamiento/{id}")
-    public ResponseEntity<Void> deleteEquipmentById(@PathVariable long id) {
-
+	
+	@DeleteMapping("/equipamiento/{id}")
+	@CrossOrigin(origins = "https://sogireact.herokuapp.com/listar-equipamientos")
+    	public ResponseEntity<Void> deleteEquipmentById(@PathVariable long id) {
         try {
-
-            equipmentService.delete(id);
-
+            	equipmentService.delete(id);
             return ResponseEntity.ok().build();
 
         } catch (ResourceNotFoundException ex) {
@@ -133,6 +131,5 @@ public class EquipmentController {
             return ResponseEntity.notFound().build();
 
         }
-
-    }
+    	}
 }
