@@ -32,25 +32,21 @@ public class EquipmentController {
 	private IEquipmentService equipmentService;
 	
 	@GetMapping("/equipamiento/todos")
-	@CrossOrigin(origins = "https://sogireact.herokuapp.com/listar-equipamientos")
 	public List<Equipment> listartodos(){
 		return equipmentService.findAll();
 	}
 	
 	@GetMapping("/equipamiento/{id}")
-	@CrossOrigin(origins = "https://sogireact.herokuapp.com/listar-equipamientos")
 	public Equipment ver(@PathVariable Long id) {
 		return equipmentService.findById(id);
 	}
 	
 	@GetMapping("/equipamiento")
-	@CrossOrigin(origins = "https://sogireact.herokuapp.com/listar-equipamientos")
     	public List<Equipment> listar(){
         	return equipmentService.findByIsDeletedFalse();
     	}
 	
 	@PostMapping(value = "/equipamiento")
-	@CrossOrigin(origins = "https://sogireact.herokuapp.com/listar-equipamientos")
 	public ResponseEntity<Equipment> addEquipment(@Validated @RequestBody Equipment equipment) 
 
             throws URISyntaxException {
@@ -77,7 +73,6 @@ public class EquipmentController {
 	
 	
 	@PutMapping("/equipamiento/{id}")
-	@CrossOrigin(origins = "https://sogireact.herokuapp.com/listar-equipamientos")
 	public ResponseEntity<Object> update(@Validated @RequestBody Equipment equipment, @PathVariable long id) {
         try {
 
@@ -103,7 +98,6 @@ public class EquipmentController {
 	
 	
 	@PatchMapping("/equipamiento/{id}")
-	@CrossOrigin(origins = "https://sogireact.herokuapp.com/listar-equipamientos")
 	public ResponseEntity<Object> updateState(@PathVariable long id) {
         try {
         	equipmentService.updateState(id);
@@ -119,7 +113,6 @@ public class EquipmentController {
 	
 	
 	@DeleteMapping("/equipamiento/{id}")
-	@CrossOrigin(origins = "https://sogireact.herokuapp.com/listar-equipamientos")
     	public ResponseEntity<Void> deleteEquipmentById(@PathVariable long id) {
         try {
             	equipmentService.delete(id);
