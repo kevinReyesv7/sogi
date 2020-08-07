@@ -26,7 +26,7 @@ public class Equipment implements Serializable{
 	private String description;
 	private Boolean state;
 	@Column(name = "is_deleted")
-	private Boolean isDeleted;
+	private Boolean isDeleted = false;
 	
 	@Transient
 	private Integer port;
