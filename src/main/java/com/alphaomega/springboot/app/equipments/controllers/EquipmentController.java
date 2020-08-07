@@ -18,24 +18,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.alphaomega.springboot.app.equipments.exception.BadResourceException;
 import com.alphaomega.springboot.app.equipments.exception.ResourceAlreadyExistsException;
 import com.alphaomega.springboot.app.equipments.exception.ResourceNotFoundException;
 import com.alphaomega.springboot.app.equipments.model.entity.Equipment;
 import com.alphaomega.springboot.app.equipments.model.service.IEquipmentService;
-
-@Bean
-    public WebMvcConfigurer configure() {
-        return new WebMvcConfigurer() {
-            	@Override
-            	public void addCorsMappings(CorsRegistry registry) {
-                	registry.addMapping("/equipamiento/**").allowedOrigins("*").allowedMethods("GET", "POST", "PUT", "DELETE");
-            	}
-        };
-    }
 
 @RestController
 public class EquipmentController {
