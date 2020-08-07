@@ -19,7 +19,7 @@ public class SpringbootServicioEquipamientosApplication {
 		return new WebMvcConfigurer(){
 			@Override
 			public void addCorsMappings(CorsRegistry registry){
-				registry.addMapping("/equipamiento/**").allowedOrigins("*").allowedMethods("GET", "POST", "PUT", "DELETE");
+				registry.addMapping("/**").allowedOrigins("*").allowedMethods("GET", "POST", "PUT", "DELETE");
 			}
 		};
 	}
