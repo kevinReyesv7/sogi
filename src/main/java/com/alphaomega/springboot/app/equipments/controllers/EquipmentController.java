@@ -24,7 +24,7 @@ import com.alphaomega.springboot.app.equipments.exception.ResourceNotFoundExcept
 import com.alphaomega.springboot.app.equipments.model.entity.Equipment;
 import com.alphaomega.springboot.app.equipments.model.service.IEquipmentService;
 
-@CrossOrigin
+@CrossOrigin(origins = "https://sogireact.herokuapp.com/*")
 @RestController
 public class EquipmentController {
 
