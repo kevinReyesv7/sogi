@@ -13,7 +13,11 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.DynamicUpdate;
+
 @Entity
+@DynamicUpdate(true)
 @Table(name = "equipments")
 public class Equipment implements Serializable{
 	
@@ -24,22 +28,12 @@ public class Equipment implements Serializable{
 	@Column(name = "last_maintenance")
 	private Date lastMaintenance;
 	private String description;
-	private Boolean state;
 	@Column(name = "is_deleted")
 	private Boolean isDeleted = false;
 	
-	@Transient
-	private Integer port;
-	
-	public Integer getPort() {
-		return port;
-	}
-	public void setPort(Integer port) {
-		this.port = port;
-	}
-
+	@CreationTimestamp
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "create_at")
-	@Temporal(TemporalType.DATE)
 	private Date createAt;
 	
 	public Long getId() {
@@ -66,12 +60,7 @@ public class Equipment implements Serializable{
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public Boolean getState() {
-		return state;
-	}
-	public void setState(Boolean state) {
-		this.state = state;
-	}
+	
 	public Date getCreateAt() {
 		return createAt;
 	}
