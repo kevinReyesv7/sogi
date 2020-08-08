@@ -24,9 +24,11 @@ public class Equipment implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@Column(nullable = false)
 	private String name;
 	@Column(name = "last_maintenance")
 	private Date lastMaintenance;
+	@Column(nullable = false)
 	private String description;
 	@Column(name = "is_deleted")
 	private Boolean isDeleted = false;
