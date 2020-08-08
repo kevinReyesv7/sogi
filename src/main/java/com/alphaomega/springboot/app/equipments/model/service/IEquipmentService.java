@@ -15,5 +15,4 @@ public interface IEquipmentService {
 	public Equipment save(Equipment equipment) throws BadResourceException, ResourceAlreadyExistsException;
 	public void update(Equipment equipment) throws BadResourceException, ResourceNotFoundException;
 	public void delete(Long id) throws ResourceNotFoundException;
-	public void updateState(Long id) throws ResourceNotFoundException;
 }
