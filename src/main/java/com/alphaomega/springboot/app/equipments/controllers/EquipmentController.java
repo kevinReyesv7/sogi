@@ -1,8 +1,10 @@
 package com.alphaomega.springboot.app.equipments.controllers;
 
+import java.lang.reflect.Field;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -72,10 +74,15 @@ public class EquipmentController {
     }
 	
 	
-	@PutMapping("/equipamiento/{id}")
-	public ResponseEntity<Object> update(@Validated @RequestBody Equipment equipment, @PathVariable long id) {
+	@PatchMapping(value = "/equipamiento/{id}")
+	public ResponseEntity<Object> partialUpdateName(@Validated @RequestBody Map<Object, Object> fields, @PathVariable long id) {
         try {
-
+	    Equipment equipment = equipmentService.findById(id);
+            fields.forEach((k, v) -> {
+                Field field = ReflectionUtils.findRequiredField(Equipment.class, (String) k);
+                field.setAccessible(true);
+                ReflectionUtils.setField(field, equipment, v);
+            });
             equipment.setId(id);
 
             equipmentService.update(equipment);
@@ -96,21 +103,7 @@ public class EquipmentController {
         }
 	}
 	
-	@PatchMapping("/equipamiento/{id}")
-	public ResponseEntity<Object> updateState(@PathVariable long id) {
-        try {
-        	equipmentService.updateState(id);
-            return ResponseEntity.ok().build();
-
-        } catch (ResourceNotFoundException ex) {
-
-
-            return ResponseEntity.notFound().build();
-
-        }
-	}
-	
-	
+			
 	@DeleteMapping("/equipamiento/{id}")
     	public ResponseEntity<Void> deleteEquipmentById(@PathVariable long id) {
         try {
