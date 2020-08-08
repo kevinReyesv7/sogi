@@ -111,26 +111,5 @@ public class EquipmentServiceImpl implements IEquipmentService{
 
         equipmentRepository.save(equipment);        
 
-    }
-	
-	
-	@Override
-	@Transactional
-    public void updateState(Long id) 
-
-            throws ResourceNotFoundException {
-
-        Equipment equipment = findById(id);
-        boolean actual = equipment.getState();
-        
-        if (actual == true) {
-        	equipment.setState(false);
-        } else {
-        	equipment.setState(true);
-        }
-
-        equipmentRepository.save(equipment);        
-
-    }
-	
+    }	
 }
