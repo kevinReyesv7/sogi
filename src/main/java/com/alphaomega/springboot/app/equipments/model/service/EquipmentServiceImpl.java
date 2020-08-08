@@ -37,79 +37,50 @@ public class EquipmentServiceImpl implements IEquipmentService{
 		return equipmentRepository.findById(id).orElse(null);
 	}
 	
-    private boolean existsById(Long id) {
-
+    	private boolean existsById(Long id) {
         return equipmentRepository.existsById(id);
-
-    }
+    	}
     
-    public Equipment save(Equipment equipment) throws BadResourceException, ResourceAlreadyExistsException {
+    	public Equipment save(Equipment equipment) throws BadResourceException, ResourceAlreadyExistsException {
 
-        if (!StringUtils.isEmpty(equipment.getName())) {
-
-            if (equipment.getId() != null && existsById(equipment.getId())) { 
-
-                throw new ResourceAlreadyExistsException("Equipment with id: " + equipment.getId() +
-
-                        " already exists");
-
-            }
-
-            return equipmentRepository.save(equipment);
-
-        }
-
-        else {
-
-            BadResourceException exc = new BadResourceException("Failed to save Equipment");
-
-            exc.addErrorMessage("Equipment is null or empty");
-
-            throw exc;
-
-        }
-
-    }
+        	if (!StringUtils.isEmpty(equipment.getName())) {
+            		if (equipment.getId() != null && existsById(equipment.getId())) { 
+                		throw new ResourceAlreadyExistsException("Equipment with id: " + equipment.getId() +
+                        		" already exists");
+            		}
+            	return equipmentRepository.save(equipment);
+        	}
+        	else {
+            		BadResourceException exc = new BadResourceException("Failed to save Equipment");
+            		exc.addErrorMessage("Equipment is null or empty");
+            		throw exc;
+        	}
+    	}
 	
 	@Override
 	@Transactional
 	public void update(Equipment equipment) 
         throws BadResourceException, ResourceNotFoundException {
+    		if (!StringUtils.isEmpty(equipment.getName())) {
+        		if (!existsById(equipment.getId())) {
+            		throw new ResourceNotFoundException("Equipamiento no encontrado" + equipment.getName());
+        		}
+        	equipmentRepository.save(equipment);
+    		}
+    		else {
+        		BadResourceException exc = new BadResourceException("Error al guardar el equipamiento");
+        		exc.addErrorMessage("El equipamiento no existe");
+        		throw exc;
 
-    if (!StringUtils.isEmpty(equipment.getName())) {
-
-        if (!existsById(equipment.getId())) {
-
-            throw new ResourceNotFoundException("Equipamiento no encontrado" + equipment.getName());
-
-        }
-
-        equipmentRepository.save(equipment);
-
-    }
-
-    else {
-
-        BadResourceException exc = new BadResourceException("Error al guardar el equipamiento");
-
-        exc.addErrorMessage("El equipamiento no existe");
-
-        throw exc;
-
-    }
+    		}
 	}
 	
 	@Override
 	@Transactional
-    public void delete(Long id) 
-
-            throws ResourceNotFoundException {
-
-        Equipment equipment = findById(id);
-
-        equipment.setIsDeleted(true);
-
-        equipmentRepository.save(equipment);        
-
-    }	
+    	public void delete(Long id) 
+        throws ResourceNotFoundException {
+        	Equipment equipment = findById(id);
+        	equipment.setIsDeleted(true);
+        	equipmentRepository.save(equipment);        
+    	}	
 }
