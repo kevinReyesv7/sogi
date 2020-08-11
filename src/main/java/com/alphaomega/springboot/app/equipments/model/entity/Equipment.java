@@ -27,7 +27,7 @@ public class Equipment implements Serializable{
 	@Column(nullable = false)
 	private String name;
 	@Column(name = "last_maintenance")
-	private Date lastMaintenance;
+	private String lastMaintenance;
 	@Column(nullable = false)
 	private String description;
 	@Column(name = "is_deleted")
@@ -52,10 +52,10 @@ public class Equipment implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Date getLastMaintenance() {
+	public String getLastMaintenance() {
 		return lastMaintenance;
 	}
-	public void setLastMaintenance(Date lastMaintenance) {
+	public void setLastMaintenance(String lastMaintenance) {
 		this.lastMaintenance = lastMaintenance;
 	}
 	public String getDescription() {
