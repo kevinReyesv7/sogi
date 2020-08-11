@@ -32,6 +32,8 @@ public class Equipment implements Serializable{
 	private String description;
 	@Column(name = "is_deleted")
 	private Boolean isDeleted = false;
+	@Column(name = "ubication")
+	private String ubication = "En bodega";
 	
 	@CreationTimestamp
 	@Temporal(TemporalType.TIMESTAMP)
@@ -61,6 +63,12 @@ public class Equipment implements Serializable{
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	public String getUbication() {
+		return ubication;
+	}
+	public void setDescription(String description) {
+		this.ubication = ubication;
 	}
 	
 	public Date getCreateAt() {

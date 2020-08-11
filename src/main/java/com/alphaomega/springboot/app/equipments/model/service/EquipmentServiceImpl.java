@@ -37,25 +37,25 @@ public class EquipmentServiceImpl implements IEquipmentService{
 		return equipmentRepository.findById(id).orElse(null);
 	}
 	
-    	private boolean existsById(Long id) {
-        return equipmentRepository.existsById(id);
-    	}
-    
-    	public Equipment save(Equipment equipment) throws BadResourceException, ResourceAlreadyExistsException {
+	private boolean existsById(Long id) {
+	return equipmentRepository.existsById(id);
+	}
 
-        	if (!StringUtils.isEmpty(equipment.getName())) {
-            		if (equipment.getId() != null && existsById(equipment.getId())) { 
-                		throw new ResourceAlreadyExistsException("Equipment with id: " + equipment.getId() +
-                        		" already exists");
-            		}
-            	return equipmentRepository.save(equipment);
-        	}
-        	else {
-            		BadResourceException exc = new BadResourceException("Failed to save Equipment");
-            		exc.addErrorMessage("Equipment is null or empty");
-            		throw exc;
-        	}
-    	}
+	public Equipment save(Equipment equipment) throws BadResourceException, ResourceAlreadyExistsException {
+
+		if (!StringUtils.isEmpty(equipment.getName())) {
+			if (equipment.getId() != null && existsById(equipment.getId())) { 
+				throw new ResourceAlreadyExistsException("Equipment with id: " + equipment.getId() +
+						" already exists");
+			}
+			return equipmentRepository.save(equipment);
+		}
+		else {
+				BadResourceException exc = new BadResourceException("Failed to save Equipment");
+				exc.addErrorMessage("Equipment is null or empty");
+				throw exc;
+		}
+	}
 	
 	@Override
 	@Transactional
