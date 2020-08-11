@@ -67,7 +67,7 @@ public class Equipment implements Serializable{
 	public String getUbication() {
 		return ubication;
 	}
-	public void setUbication(String description) {
+	public void setUbication(String ubication) {
 		this.ubication = ubication;
 	}
 	
